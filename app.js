@@ -15,5 +15,5 @@ app.use(cors({ origin: '*', methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 
 app.use('/api', require('./routes/user'))
 app.use('/post', require('./routes/post'))
 app.listen(port, () => {
-  console.log(`Server is working at ${port}`)
+  console.log(`Server is working at ${port} `)
 })
