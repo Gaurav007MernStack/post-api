@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 
 const userRegister = async (req, res) => {
     try {
-        const email = req.body.email;
+        const {email, username} = req.body;
         console.log("email => ", email);
-        let isUserExists = await USER.findOne({ email });
+        let isUserExists = await USER.findOne({$or:[{email},{username}]});
         console.log("isUserExists > ", isUserExists);
         if (isUserExists?.email)
-            return res.status(400).json({ message: "Email Should Be Unique" });
+            return res.status(400).json({ message: "Email/UserName Should Be Unique" });
 
 
 
@@ -30,7 +30,7 @@ const userLogin = async (req, res) => {
         const { password } = req.body;
         console.log(req.body);
 
-        const user = await USER.findOne({ email: req.body.username });
+        const user = await USER.findOne({ email: req.body.email });
         console.log("user is = ", user);
         if (!user)
             return res.status(400).json({ message: "Invalid Email Or Password" })
