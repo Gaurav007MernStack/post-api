@@ -19,7 +19,7 @@ const postRegister = async (req, res) => {
 
 const postGetAll = async (req, res) => {
     try {
-        const post = await POST.find()
+        const post = await POST.find().populate('authorInformation')
         if (!post)
             return res.status(400).json({ message: "Post are not available" });
 
